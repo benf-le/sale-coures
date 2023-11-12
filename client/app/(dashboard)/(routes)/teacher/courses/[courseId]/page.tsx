@@ -9,6 +9,8 @@ import {ImageForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_
 import {CategoryForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/category-form";
 import { PriceForm } from "./_components/price-form";
 import {AttachmentForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/attachment-form";
+import {ChaptersForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/chapter-form";
+import toast from "react-hot-toast";
 
 
 const CourseIdPage = async (
@@ -18,14 +20,21 @@ const CourseIdPage = async (
     const {userId}= auth();
 
     if(!userId){
+
         return  redirect("/")
     }
 
     const course = await db.course.findUnique({
         where: {
-            id: params.courseId
+            id: params.courseId,
+            userId
         },
         include:{
+            chapters:{
+                orderBy:{
+                    position: "asc"
+                }
+            },
             attachments:{
                 orderBy:{
                     createdAt: "desc"
@@ -51,7 +60,8 @@ const CourseIdPage = async (
         course.description,
         course.imageUrl,
         course.price,
-        course.categoryId
+        course.categoryId,
+        course.chapters.some(chapter => chapter.isPublished)
     ]
 
     const totalFields = requiredFields.length;
@@ -119,10 +129,10 @@ const CourseIdPage = async (
                                 Course chapters
                             </h2>
                         </div>
-                        {/*<ChaptersForm*/}
-                        {/*    initialData={course}*/}
-                        {/*    courseId={course.id}*/}
-                        {/*/>*/}
+                        <ChaptersForm
+                            initialData={course}
+                            courseId={course.id}
+                        />
                     </div>
 
                     <div>

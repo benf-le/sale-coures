@@ -13,7 +13,7 @@ export async function POST(
     try {
         const { userId } = auth();
 
-        const {url} = await req.json();
+        const {title} = await req.json();
 
         if (!userId) {
 
@@ -34,15 +34,9 @@ export async function POST(
         }
 
 
-        const attachment = await db.attachment.create({
-            data: {
-                url,
-                name: url.split('/').pop(),
-                courseId: params.courseId
-            }
-        })
 
-        return NextResponse.json(attachment);
+
+
     } catch (error) {
         console.log("COURSE_ID_ATTACHMENT", error);
         return new NextResponse("Internal Error", { status: 500 });
