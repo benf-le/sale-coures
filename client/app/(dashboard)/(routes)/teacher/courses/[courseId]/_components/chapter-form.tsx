@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import {Input} from "@/components/ui/input";
+import {ChaptersList} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/chapters-list";
 
 interface ChaptersFormProps {
     initialData: Course & {chapters:Chapter[]}
@@ -117,7 +118,11 @@ export const ChaptersForm = ({
                 "text-sm mt-2",
                         !initialData.chapters.length && "text-slate-500 italic")}>
                     {!initialData.chapters.length && "No chapter"}
-                     {/*Add a list of chapter*/}
+                     <ChaptersList
+                         onEdit={() => {}}
+                         onReorder={() => {}}
+                         items={initialData.chapters || []}
+                     />
 
                 </div>
             )}
