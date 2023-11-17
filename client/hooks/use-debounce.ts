@@ -15,3 +15,5 @@ export function useDebounce<T>(value: T, delay?:number): T {
 
     return debouncedValue;
 };
+
+// dùng để ngăn chặn người dùng search liên tục, hàm trên dùng để delay 500ms sau mỗi lần người dùng nhập vào input
