@@ -8,6 +8,9 @@ import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
 //
 import { VideoPlayer } from "./_components/video-player";
+import {
+    CourseEnrollButton
+} from "@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/course-enroll-button";
 // import { CourseEnrollButton } from "./_components/course-enroll-button";
 // import { CourseProgressButton } from "./_components/course-progress-button";
 
@@ -77,19 +80,21 @@ const ChapterIdPage = async ({
                         <h2 className="text-2xl font-semibold mb-2">
                             {chapter.title}
                         </h2>
-                        {/*{purchase ? (*/}
-                        {/*    <CourseProgressButton*/}
-                        {/*        chapterId={params.chapterId}*/}
-                        {/*        courseId={params.courseId}*/}
-                        {/*        nextChapterId={nextChapter?.id}*/}
-                        {/*        isCompleted={!!userProgress?.isCompleted}*/}
-                        {/*    />*/}
-                        {/*) : (*/}
-                        {/*    <CourseEnrollButton*/}
-                        {/*        courseId={params.courseId}*/}
-                        {/*        price={course.price!}*/}
-                        {/*    />*/}
-                        {/*)}*/}
+                        {purchase ? (
+                            // <CourseProgressButton
+                            //     chapterId={params.chapterId}
+                            //     courseId={params.courseId}
+                            //     nextChapterId={nextChapter?.id}
+                            //     isCompleted={!!userProgress?.isCompleted}
+                            // />
+                            <div>djf</div>
+
+                        ) : (
+                            <CourseEnrollButton
+                                courseId={params.courseId}
+                                price={course.price!}
+                            />
+                        )}
                     </div>
                     <Separator />
                     <div>
