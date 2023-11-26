@@ -1,6 +1,6 @@
 import {Body, Controller, Param, ParseEnumPipe, Post, UnauthorizedException} from '@nestjs/common';
 import {AuthService} from "./auth.service";
-import {register} from "tsconfig-paths";
+
 import { GenerateProductKeyDTO, LoginDTO, RegisterDTO} from "./dto";
 import {UserType} from "@prisma/client";
 import * as process from "process";

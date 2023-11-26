@@ -3,12 +3,12 @@ import {Module} from '@nestjs/common';
 import {AuthModule} from "./auth/auth.module";
 import {PrismaModule} from './prisma/prisma.module';
 import {ConfigModule} from "@nestjs/config";
-import { ProductsModule } from './products/products.module';
-import {CollectionsModule} from "./collections/collections.module";
+
 import {APP_GUARD, APP_INTERCEPTOR} from "@nestjs/core";
 import {UserInterceptors} from "./auth/interceptors/user.interceptors";
 import {AuthorizationGuard} from "./auth/guard/authorization.guard";
 import {UserModule} from "./user/user.module";
+import {CoursesModule} from "./courses/courses.module";
 
 @Module({
     imports: [
@@ -18,8 +18,7 @@ import {UserModule} from "./user/user.module";
         AuthModule,
         UserModule,
         PrismaModule,
-        ProductsModule,
-        CollectionsModule
+        CoursesModule,
     ],
     providers:[{
         provide: APP_INTERCEPTOR,

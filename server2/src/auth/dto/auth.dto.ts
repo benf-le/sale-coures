@@ -11,10 +11,9 @@ export class RegisterDTO {
     @IsNotEmpty() // dung de validate
     password: string
 
-
-    firstName: string
-
-    lastName: string
+    @IsString()
+    @IsNotEmpty()
+    name: string
 
     @IsOptional()
     @IsString()

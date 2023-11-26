@@ -9,8 +9,7 @@ import * as process from "process";
 interface SignUpParams {
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    name: string;
 }
 
 interface SignInParams {
@@ -29,7 +28,7 @@ export class AuthService {
 
     }
 
-    async register({email, password, firstName, lastName}: SignUpParams, userType: UserType) {
+    async register({email, password, name}: SignUpParams, userType: UserType) {
         const userExists = await this.prismaService.user.findUnique({
             where: {
                 email
@@ -47,14 +46,13 @@ export class AuthService {
             data: {
                 email,
                 password: hashedPassword,
-                firstName,
-                lastName,
+                name,
                 user_type: userType,
             }
         })
 
 
-        const access_token = this.generateJWT(user.firstName,user.email, user.id,user.user_type)
+        const access_token = this.generateJWT(user.name,user.email, user.id,user.user_type)
 
         return access_token
     }
@@ -79,7 +77,7 @@ export class AuthService {
         }
 
         console.log(user.user_type)
-        const access_token = this.generateJWT(user.firstName,user.email, user.id, user.user_type)
+        const access_token = this.generateJWT(user.name,user.email, user.id, user.user_type)
 
         return {'access_token': access_token, 'UserId': user.id}
 
@@ -89,9 +87,9 @@ export class AuthService {
 
     }
 
-    private generateJWT(firstName: string, email: string, id: string,userType: UserType) {
+    private generateJWT(name: string, email: string, id: string,userType: UserType) {
         return jwt.sign({
-            firstName,
+            name,
                 email,
                 id,
             userType
