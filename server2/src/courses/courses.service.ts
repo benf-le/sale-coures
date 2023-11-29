@@ -81,7 +81,7 @@ export class CoursesService {
                 where: {id}
             });
 
-            if( deleteCourse) {
+            if(deleteCourse) {
                 return 'Deleted Courses'
             }
             else {return 'Error Delete Courses'};

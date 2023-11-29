@@ -49,19 +49,16 @@ export class CoursesController{
     }
     //
     //
-    // @Roles(UserType.ADMIN)
-    // // @UseGuards(AuthorizationGuard)
-    // @Delete("/delete-course/:id")
-    // deleteCourse( @Param('id')id: string){
-    //     return this.coursesService.deleteCourses( id)
-    // }
-    //
+    @Roles(UserType.ADMIN)
+    // @UseGuards(AuthorizationGuard)
+    @Delete("/delete-course/:id")
+    deleteCourse( @Param('id')id: string){
+        return this.coursesService.deleteCourses( id)
+    }
 
 
-    // @Get("showCoursesSale:id") // register a new user
-    // async getCoursesSale(coursesDTO:CollectionsDto){
-    //     return await this.coursesService.getCoursesSale(coursesDTO)
-    // }
+
+
 
 }
 //USER

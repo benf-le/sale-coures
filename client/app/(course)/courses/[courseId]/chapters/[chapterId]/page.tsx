@@ -6,13 +6,13 @@ import { getChapter } from "@/actions/get-chapter";
 import { Banner } from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
-//
+
 import { VideoPlayer } from "./_components/video-player";
+import { CourseEnrollButton } from "./_components/course-enroll-button";
 import {
-    CourseEnrollButton
-} from "@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/course-enroll-button";
-// import { CourseEnrollButton } from "./_components/course-enroll-button";
-// import { CourseProgressButton } from "./_components/course-progress-button";
+    CourseProgressButton
+} from "@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/course-progress-button";
+
 
 const ChapterIdPage = async ({
                                  params
@@ -45,9 +45,7 @@ const ChapterIdPage = async ({
 
 
     const isLocked = !chapter.isFree && !purchase;
-    const completeOnEnd = !!purchase && !userProgress?.isCompleted; //!!purchase => boolean = true, phủ định của phu định = true
-                                                                            // neu userProgress?.isCompleted = true => completeOnEnd = false, userProgress?.isCompleted là tiến trình người dùng đã hoàn thành video
-
+    const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
     return (
         <div>
@@ -81,14 +79,12 @@ const ChapterIdPage = async ({
                             {chapter.title}
                         </h2>
                         {purchase ? (
-                            // <CourseProgressButton
-                            //     chapterId={params.chapterId}
-                            //     courseId={params.courseId}
-                            //     nextChapterId={nextChapter?.id}
-                            //     isCompleted={!!userProgress?.isCompleted}
-                            // />
-                            <div>djf</div>
-
+                            <CourseProgressButton
+                                chapterId={params.chapterId}
+                                courseId={params.courseId}
+                                nextChapterId={nextChapter?.id}
+                                isCompleted={!!userProgress?.isCompleted}
+                            />
                         ) : (
                             <CourseEnrollButton
                                 courseId={params.courseId}

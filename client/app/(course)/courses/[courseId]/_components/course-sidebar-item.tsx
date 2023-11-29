@@ -23,9 +23,7 @@ export const CourseSidebarItem = ({
     const pathname = usePathname();
     const router = useRouter();
 
-    //check xem có bị khoá không, nếu ko thì check xem đã hoàn thành hết các mục trong chapter de public ra
     const Icon = isLocked ? Lock : (isCompleted ? CheckCircle : PlayCircle);
-
     const isActive = pathname?.includes(id);
 
     const onClick = () => {
