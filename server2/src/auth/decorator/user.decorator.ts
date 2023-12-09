@@ -13,12 +13,3 @@ export const Users = createParamDecorator((data, context: ExecutionContext)=>{
     return request.user
 })
 
-
-// export const Userss = createParamDecorator(
-//     (key: string, context: ExecutionContext) => {
-//         const request:Express.Request = context.switchToHttp().getRequest();
-//         const user = request.user
-//         return key ? user?.[key] : user
-//     },
-//
-// );

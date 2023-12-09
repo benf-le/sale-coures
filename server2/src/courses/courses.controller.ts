@@ -31,15 +31,15 @@ export class CoursesController{
     // async creatCourses(coursesDTO:CourseDTO){
     //     return this.coursesService.creatCourses(coursesDTO)
     // }
-    @Roles(UserType.ADMIN)
-    @UseGuards(AuthorizationGuard)
-    @Post("/create-course")
-    createCourse(@Body() courseDTO:CourseDTO, @Users() user: UserInfo){
-
-        return this.coursesService.creatCourses(courseDTO, user.id)
-    }
+    // @Roles(UserType.ADMIN)
+    // @UseGuards(AuthorizationGuard)
+    // @Post("/create-course")
+    // createCourse(@Body() courseDTO:CourseDTO, @Users() user: UserInfo){
     //
-    //
+    //     return this.coursesService.creatCourses(courseDTO, user.id)
+    // }
+    // //
+    // //
     @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
     @Put("/update-course/:id")
