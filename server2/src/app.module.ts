@@ -9,6 +9,7 @@ import {UserInterceptors} from "./auth/interceptors/user.interceptors";
 import {AuthorizationGuard} from "./auth/guard/authorization.guard";
 import {UserModule} from "./user/user.module";
 import {CoursesModule} from "./courses/courses.module";
+import {ChaptersModule} from "./chapters/chapters.module";
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import {CoursesModule} from "./courses/courses.module";
         }), //đọc dữ liệu từ file env, bảo mật database, không đẩy file env lên github
         AuthModule,
         UserModule,
+        ChaptersModule,
         PrismaModule,
         CoursesModule,
     ],

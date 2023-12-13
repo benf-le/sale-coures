@@ -13,7 +13,7 @@ export class ChaptersService {
 
     async getChapter(coursesDTO: ChapterDTO) {
         try {
-            return await this.prismaService.course.findMany({})
+            return await this.prismaService.chapter.findMany({})
         } catch (error) {
 
             return error
@@ -22,7 +22,7 @@ export class ChaptersService {
 
     async getChapterById(id: string) {
         try {
-            return await this.prismaService.course.findUnique({
+            return await this.prismaService.chapter.findUnique({
                 where: {
                     id
                 }
@@ -65,14 +65,14 @@ export class ChaptersService {
 
 
 
-    async updateChapter(coursesDTO: ChapterDTO, id: string){
+    async updateChapter(chapterDTO: ChapterDTO, id: string){
         try {
-            const updateCourse = await this.prismaService.course.update({
+            const updateCourse = await this.prismaService.chapter.update({
                 data: {
-                    title: coursesDTO.title,
-                    description: coursesDTO.description,
+                    title: chapterDTO.title,
+                    description: chapterDTO.description,
 
-                    isPublished: coursesDTO.isPublished,
+                    isPublished: chapterDTO.isPublished,
 
 
                 },
@@ -88,7 +88,7 @@ export class ChaptersService {
 
     async deleteChapter(id: string){
         try {
-            const deleteCourse = await this.prismaService.course.delete({
+            const deleteCourse = await this.prismaService.chapter.delete({
                 where: {id}
             });
 

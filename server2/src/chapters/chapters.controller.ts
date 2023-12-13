@@ -8,7 +8,7 @@ import {AuthorizationGuard} from "../auth/guard/authorization.guard";
 import {ChapterDTO} from "./dto";
 
 
-@Controller('courses/:id/chapters')
+@Controller(`courses/:id/chapters`)
 @UseGuards()
 export class ChaptersController {
 
@@ -28,16 +28,16 @@ export class ChaptersController {
     }
     
 
-    @Roles(UserType.ADMIN)
-    @UseGuards(AuthorizationGuard)
-    @Post("/create-chapter")
+    // @Roles(UserType.ADMIN)
+    // @UseGuards(AuthorizationGuard)
+    @Post(`/create-chapter`)
     createChapter(@Body() chapterDTO:ChapterDTO, @Param('id') courseId: string){
 
         return this.chaptersService.creatChapter(chapterDTO, courseId)
     }
     //
     //
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
     @Put("/:id/update-chapter")
     updateChapter(@Body() chapterDTO:ChapterDTO, @Param('id')id: string){
@@ -46,7 +46,7 @@ export class ChaptersController {
     }
     //
     //
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
     @Delete("/:id/delete-chapter")
     deleteChapter( @Param('id')id: string){
