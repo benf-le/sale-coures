@@ -1,5 +1,8 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 datasource db {
-  provider     = "mysql"
+  // provider = "mysql"
+  provider     = "mongodb"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -9,17 +12,32 @@ generator client {
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
+model User {
+  id        String   @id @default(uuid()) @map("_id")
+  email     String   @unique
+  password  String
+  name      String
+  user_type UserType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  course Course[]
+}
+
 model Course {
-  id          String  @id @default(uuid())
-  userId      String
-  title       String  @db.Text
-  description String? @db.Text
-  imageUrl    String? @db.Text
+  id String @id @default(uuid()) @map("_id")
+
+  title       String //@db.Text
+  description String? // @db.Text
+  imageUrl    String? // @db.Text
   price       Float?
   isPublished Boolean @default(false)
 
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   chapters    Chapter[]
   attachments Attachment[]
@@ -33,15 +51,15 @@ model Course {
 }
 
 model Category {
-  id      String   @id @default(uuid())
+  id      String   @id @default(uuid()) @map("_id")
   name    String   @unique
   courses Course[]
 }
 
 model Attachment {
-  id   String @id @default(uuid())
+  id   String @id @default(uuid()) @map("_id")
   name String
-  url  String @db.Text
+  url  String //@db.Text
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
@@ -53,10 +71,10 @@ model Attachment {
 }
 
 model Chapter {
-  id          String  @id @default(uuid())
+  id          String  @id @default(uuid()) @map("_id")
   title       String
-  description String? @db.Text
-  videoUrl    String? @db.Text
+  description String? //@db.Text
+  videoUrl    String? // @db.Text
   position    Int
   isPublished Boolean @default(false)
   isFree      Boolean @default(false)
@@ -75,7 +93,7 @@ model Chapter {
 }
 
 model MuxData {
-  id         String  @id @default(uuid())
+  id         String  @id @default(uuid()) @map("_id")
   assetId    String
   playbackId String?
 
@@ -84,7 +102,7 @@ model MuxData {
 }
 
 model UserProgress {
-  id     String @id @default(uuid())
+  id     String @id @default(uuid()) @map("_id")
   userId String
 
   chapterId String
@@ -100,7 +118,7 @@ model UserProgress {
 }
 
 model Purchase {
-  id     String @id @default(uuid())
+  id     String @id @default(uuid()) @map("_id")
   userId String
 
   courseId String
@@ -114,10 +132,15 @@ model Purchase {
 }
 
 model StripeCustomer {
-  id               String @id @default(uuid())
+  id               String @id @default(uuid()) @map("_id")
   userId           String @unique
   stripeCustomerId String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum UserType {
+  USER
+  ADMIN
 }
