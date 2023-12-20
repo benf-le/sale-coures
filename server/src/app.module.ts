@@ -10,6 +10,7 @@ import {AuthorizationGuard} from "./auth/guard/authorization.guard";
 import {UserModule} from "./user/user.module";
 import {CoursesModule} from "./courses/courses.module";
 import {ChaptersModule} from "./chapters/chapters.module";
+import {AttachmentsModule} from "./attachments/chapters.module";
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import {ChaptersModule} from "./chapters/chapters.module";
         ChaptersModule,
         PrismaModule,
         CoursesModule,
+        AttachmentsModule
     ],
     providers:[{
         provide: APP_INTERCEPTOR,
