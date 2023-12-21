@@ -18,17 +18,17 @@ export class AuthController {
     @Post("register/:userType")  // register a new user
      async registerAdmin(@Body() registerDTO:RegisterDTO, @Param('userType', new ParseEnumPipe(UserType)) userType:UserType) {
 
-        if (userType!==UserType.USER){
-            if (registerDTO.productKey){
-                throw new UnauthorizedException()
-            }
-            const validProductKey = `${registerDTO.email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`
-
-            const isValidProductKey= await bcrypt.compare(validProductKey, registerDTO.productKey)
-            if (!isValidProductKey){
-                throw new UnauthorizedException()
-            }
-        }
+        // if (userType!==UserType.USER){
+        //     if (registerDTO.productKey){
+        //         throw new UnauthorizedException()
+        //     }
+        //     const validProductKey = `${registerDTO.email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`
+        //
+        //     const isValidProductKey= await bcrypt.compare(validProductKey, registerDTO.productKey)
+        //     if (!isValidProductKey){
+        //         throw new UnauthorizedException()
+        //     }
+        // }
 
         return this.authService.register(registerDTO, userType)
     }

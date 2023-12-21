@@ -31,42 +31,46 @@ export class CoursesController{
     // async creatCourses(coursesDTO:CourseDTO){
     //     return this.coursesService.creatCourses(coursesDTO)
     // }
-    @Roles(UserType.ADMIN)
-    @UseGuards(AuthorizationGuard)
+    // @Roles(UserType.ADMIN)
+    // @UseGuards(AuthorizationGuard)
     @Post("/create-course")
-    createCourse(@Body() courseDTO:CourseDTO, @Users() user: UserInfo){
+    createCourse(@Body() courseDTO: CourseDTO, @Body() user: any) {
+        const userId = user.userId;
 
-        return this.coursesService.creatCourses(courseDTO, user.id)
+        console.log(userId);
+        return this.coursesService.createCourses(courseDTO, userId);
     }
     // //
     // //
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
-    @Put("/update-course/:id")
+    @Patch("/update-course/:id")
     updateCourse(@Body() courseDTO:CourseDTO, @Param('id')id: string){
         // const adminId = this.coursesService.getAdminByCourseId()
         return this.coursesService.updateCourses(courseDTO, id)
     }
     //
     //
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
     @Delete("/delete-course/:id")
     deleteCourse( @Param('id')id: string){
         return this.coursesService.deleteCourses( id)
     }
 
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
     @Patch(`/:courseId/publish`)
-    publishedChapter(@Param('courseId')courseId: string, @Users() user: UserInfo){
-        return this.coursesService.publishedCourse( courseId, user.id)
+    publishedChapter(@Param('courseId')courseId: string){
+
+        return this.coursesService.publishedCourse( courseId)
     }
 
 
-    @Roles(UserType.ADMIN)
+    // @Roles(UserType.ADMIN)
         @Patch(`/:courseId/unpublish`)
-    unPublishedChapter(@Param('courseId')courseId: string, @Users() user: UserInfo){
-        return this.coursesService.unPublishedCourse( courseId, user.id)
+    unPublishedChapter(@Param('courseId')courseId: string){
+
+        return this.coursesService.unPublishedCourse( courseId)
     }
 
 

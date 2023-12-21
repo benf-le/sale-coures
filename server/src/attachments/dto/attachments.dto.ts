@@ -1,6 +1,6 @@
 // Define a "type" of "authentication request"
 import {IsBoolean,  IsNotEmpty, IsNumber, IsOptional, IsString} from 'class-validator'
-import {AttachmentsModule} from "../chapters.module";
+import {AttachmentsModule} from "../attachments.module";
 
 
 export class AttachmentDTO {

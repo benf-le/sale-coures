@@ -31,7 +31,7 @@ export class CoursesService {
         }
     }
 
-    async creatCourses(coursesDTO: CourseDTO, userId: string) {
+    async createCourses(coursesDTO: CourseDTO, userId: string) {
         try {
 
             const createCourse = await this.prismaService.course.create({
@@ -42,10 +42,11 @@ export class CoursesService {
                     imageUrl: coursesDTO.imageUrl,
                     price: coursesDTO.price,
                     isPublished: coursesDTO.isPublished,
+                    categoryId: coursesDTO.categoryId
                 }
             });
 
-            return createCourse;
+            return createCourse
         } catch (error) {
             throw new Error(`Could not create product: ${error.message}`);
         }
@@ -62,13 +63,12 @@ export class CoursesService {
                     imageUrl: coursesDTO.imageUrl,
                     price: coursesDTO.price,
                     isPublished: coursesDTO.isPublished,
-
-
+                    categoryId: coursesDTO.categoryId
                 },
                 where: {id}
             });
 
-            return updateCourse;
+            return updateCourse
         } catch (error) {
             throw new Error(`Could not update product: ${error.message}`);
         }
@@ -90,12 +90,15 @@ export class CoursesService {
         }
     }
 
-    async publishedCourse(courseId: string, userId: string){
+
+    async publishedCourse(courseId: string){
+        const UserId = process.env.NEXT_PUBLIC_TEACHER_ID
+        console.log(UserId)
 
         const course = await this.prismaService.course.findUnique({
             where: {
                 id: courseId,
-                userId,
+                userId: UserId,
             },
             include: {
                 chapters: {
@@ -112,28 +115,30 @@ export class CoursesService {
 
         const hasPublishedChapter = course.chapters.some((chapter) => chapter.isPublished);
 
-        // if (!course.title || !course.description || !course.imageUrl || !course.categoryId || !hasPublishedChapter) {
-        //     return "Missing required fields"
-        // }
+        if (!course.title || !course.description || !course.imageUrl || !course.categoryId || !hasPublishedChapter) {
+            return "Missing required fields"
+        }
 
         const publishedCourse = await this.prismaService.course.update({
             where: {
                 id: courseId,
-                userId,
+                userId: UserId,
             },
             data: {
                 isPublished: true,
             }
         });
 
-        return  publishedCourse
+        return publishedCourse
     }
 
-    async unPublishedCourse(courseId: string, userId: string){
+    async unPublishedCourse(courseId: string){
+        const UserId = process.env.NEXT_PUBLIC_TEACHER_ID
+        console.log(UserId)
         const course = await this.prismaService.course.findUnique({
             where: {
                 id: courseId,
-                userId,
+                userId: UserId,
             }
         });
 
@@ -145,13 +150,13 @@ export class CoursesService {
         const unPublishedCourse = await this.prismaService.course.update({
             where: {
                 id: courseId,
-                userId,
+                userId: UserId,
             },
             data: {
                 isPublished: false,
             }
         });
 
-        return unPublishedCourse
+        return  unPublishedCourse
     }
 }

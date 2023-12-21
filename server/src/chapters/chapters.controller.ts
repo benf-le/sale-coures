@@ -33,13 +33,13 @@ export class ChaptersController {
     @Post(`/create-chapter`)
     createChapter(@Body() chapterDTO:ChapterDTO, @Param('courseId') courseId: string){
 
-        return this.chaptersService.creatChapter(chapterDTO, courseId)
+        return this.chaptersService.createChapter(chapterDTO, courseId)
     }
     //
     //
     // @Roles(UserType.ADMIN)
     // @UseGuards(AuthorizationGuard)
-    @Put("/:chapterId/update-chapter")
+    @Patch("/:chapterId/update-chapter")
     updateChapter(@Body() chapterDTO:ChapterDTO,  @Param('courseId')courseId: string, @Param('chapterId')chapterId: string, @Body() body: any){
         console.log('Body data:', body);
         return this.chaptersService.updateChapter(chapterDTO, courseId,chapterId, body)
@@ -53,12 +53,14 @@ export class ChaptersController {
         return this.chaptersService.deleteChapter( courseId,chapterId)
     }
 
+    // @Roles(UserType.ADMIN)
+
     @Patch(`/:chapterId/publish`)
     publishedChapter(@Param('courseId')courseId: string, @Param('chapterId')chapterId: string){
         return this.chaptersService.publishedChapter( courseId,chapterId)
     }
 
-
+    // @Roles(UserType.ADMIN)
     @Patch(`/:chapterId/unpublish`)
     unPublishedChapter(@Param('courseId')courseId: string, @Param('chapterId')chapterId: string){
         return this.chaptersService.unPublishedChapter( courseId,chapterId)

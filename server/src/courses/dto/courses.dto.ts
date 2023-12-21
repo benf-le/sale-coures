@@ -5,8 +5,8 @@ import {IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString} from 'cla
 export class CourseDTO {
 
 
-    @IsString()
-    @IsNotEmpty()
+    // @IsString()
+    // @IsNotEmpty()
     title       :string //@db.Text
 
     @IsString()

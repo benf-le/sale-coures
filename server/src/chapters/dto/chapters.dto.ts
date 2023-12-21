@@ -6,20 +6,20 @@ export class ChapterDTO {
 
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     title       :string //@db.Text
 
     @IsString()
     @IsOptional()
-    description? :string
+    description :string
 
     @IsString()
     @IsOptional()
-    videoUrl?    :string
+    videoUrl    :string
 
     @IsString()
     @IsOptional()
-    position?    :string
+    position    :string
 
 
     @IsBoolean()
@@ -30,7 +30,7 @@ export class ChapterDTO {
 
     @IsString()
     @IsOptional()
-    courseId?: string;
+    courseId: string;
 
 
 }

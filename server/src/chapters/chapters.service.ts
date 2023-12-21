@@ -40,7 +40,7 @@ export class ChaptersService {
         }
     }
 
-    async creatChapter(chapterDTO: ChapterDTO, courseId: string) {
+    async createChapter(chapterDTO: ChapterDTO, courseId: string) {
         try {
 
             const lastChapter = await this.prismaService.chapter.findFirst({
@@ -56,7 +56,7 @@ export class ChaptersService {
 
 
 
-            const createCourse = await this.prismaService.chapter.create({
+            const createChapter = await this.prismaService.chapter.create({
                 data: {
                     title: chapterDTO.title,
                     position: newPosition,
@@ -64,7 +64,7 @@ export class ChaptersService {
                 }
             });
 
-            return createCourse;
+            return ("CreateChapter" + createChapter);
         } catch (error) {
             throw new Error(`Could not create product: ${error.message}`);
         }
@@ -270,4 +270,5 @@ export class ChaptersService {
     }
 
 
-  }
+
+}

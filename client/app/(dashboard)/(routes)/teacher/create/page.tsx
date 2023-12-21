@@ -24,6 +24,8 @@ const formSchema = z.object({
   title: z.string().min(1, {
     message: "Title is required",
   }),
+  userId: z.string().min(1, {
+  }),
 });
 
 const CreatePage = () => {
@@ -31,7 +33,8 @@ const CreatePage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: ""
+      title: "",
+      userId:"user_2XLsYu0qpha2QXzgL1h4ZjFVeGt"
     },
   });
 
@@ -39,9 +42,10 @@ const CreatePage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/courses", values);
+      const response = await axios.post("http://localhost:7000/courses/create-course", values);
       router.push(`/teacher/courses/${response.data.id}`);
       toast.success("Course created");
+
     } catch {
       toast.error("Something went wrong");
     }

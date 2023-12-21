@@ -10,7 +10,7 @@ import {AuthorizationGuard} from "./auth/guard/authorization.guard";
 import {UserModule} from "./user/user.module";
 import {CoursesModule} from "./courses/courses.module";
 import {ChaptersModule} from "./chapters/chapters.module";
-import {AttachmentsModule} from "./attachments/chapters.module";
+import {AttachmentsModule} from "./attachments/attachments.module";
 
 @Module({
     imports: [
