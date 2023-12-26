@@ -27,12 +27,7 @@ export class CoursesController{
     }
     
 
-    // @Post("/create-course")
-    // async creatCourses(coursesDTO:CourseDTO){
-    //     return this.coursesService.creatCourses(coursesDTO)
-    // }
-    // @Roles(UserType.ADMIN)
-    // @UseGuards(AuthorizationGuard)
+
     @Post("/create-course")
     createCourse(@Body() courseDTO: CourseDTO, @Body() user: any) {
         const userId = user.userId;
@@ -40,25 +35,23 @@ export class CoursesController{
         console.log(userId);
         return this.coursesService.createCourses(courseDTO, userId);
     }
-    // //
-    // //
-    // @Roles(UserType.ADMIN)
-    // @UseGuards(AuthorizationGuard)
+
+
+
     @Patch("/update-course/:id")
     updateCourse(@Body() courseDTO:CourseDTO, @Param('id')id: string){
         // const adminId = this.coursesService.getAdminByCourseId()
         return this.coursesService.updateCourses(courseDTO, id)
     }
-    //
-    //
-    // @Roles(UserType.ADMIN)
-    // @UseGuards(AuthorizationGuard)
+
+
+
     @Delete("/delete-course/:id")
     deleteCourse( @Param('id')id: string){
         return this.coursesService.deleteCourses( id)
     }
 
-    // @Roles(UserType.ADMIN)
+
     @Patch(`/:courseId/publish`)
     publishedChapter(@Param('courseId')courseId: string){
 
@@ -66,8 +59,7 @@ export class CoursesController{
     }
 
 
-    // @Roles(UserType.ADMIN)
-        @Patch(`/:courseId/unpublish`)
+    @Patch(`/:courseId/unpublish`)
     unPublishedChapter(@Param('courseId')courseId: string){
 
         return this.coursesService.unPublishedCourse( courseId)
@@ -77,8 +69,3 @@ export class CoursesController{
 
 
 }
-//USER
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxNEBnbWFpbC5jb20iLCJpZCI6IjY0ZGE4OTgyZDA5YTE2NGViZjRkYjA2MiIsImlhdCI6MTY5MjA0MzY1MCwiZXhwIjoxNjkyNDAzNjUwfQ.Cg-H5OTteIOGKe9oPOkQEotK1F6BYuiV7ufrJICLgtU
-
-//ADMIN
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxMkBnbWFpbC5jb20iLCJpZCI6IjY0ZGE0YTYzODY0MWViZTM5NDlkMTRiYiIsImlhdCI6MTY5MjA0MjQ4OSwiZXhwIjoxNjkyNDAyNDg5fQ.8vPq_vMIdZrPsnwGy9vGat-X8agMe2GuzWpfNLXVJWc

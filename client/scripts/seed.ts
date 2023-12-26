@@ -10,9 +10,11 @@ async function main() {
         { name: "Music" },
         { name: "Fitness" },
         { name: "Photography" },
-        { name: "Accounting" },
+        // { name: "Accounting" },
         { name: "Engineering" },
         { name: "Filming" },
+        { name: "Art" },
+
       ]
     });
 

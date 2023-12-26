@@ -38,7 +38,7 @@ export class AttachmentsController {
         return this.attachmentsService.deleteAttachment(courseId, attachmentId)
     }
 
-    @Roles(UserType.ADMIN)
+
     @Post("uploadfile")
     @UseInterceptors(FilesInterceptor('url', 1))
     uploadFile(@Req() req: any, @UploadedFile() file: Express.Multer.File) {

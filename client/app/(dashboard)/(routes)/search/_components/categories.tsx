@@ -22,10 +22,10 @@ const iconMap: Record<Category["name"], IconType> = {
   "Music": FcMusic,
   "Photography": FcOldTimeCamera,
   "Fitness": FcSportsMode,
-  "Accounting": FcSalesPerformance,
   "Computer Science": FcMultipleDevices,
   "Filming": FcFilmReel,
   "Engineering": FcEngineering,
+  "Art":FcOldTimeCamera
 };
 
 export const Categories = ({
